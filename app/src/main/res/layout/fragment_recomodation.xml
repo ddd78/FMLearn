@@ -1,0 +1,13 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.a78.com.fmlearn.fragements.RecomodationFragment">
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recommend_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"/>
+
+
+</RelativeLayout>
