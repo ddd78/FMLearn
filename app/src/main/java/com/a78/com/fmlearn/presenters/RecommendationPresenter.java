@@ -38,6 +38,9 @@ public class RecommendationPresenter implements IRecommendationPresenter {
                 }
             }
         }
+        if (recommendationInstance == null){
+
+        }
         return recommendationInstance;
     }
 
