@@ -3,12 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="maincolor">#5F9EA0</color>
+    <color name="maincolor">#FF6A6A</color>
     <color name="white">#FFFFF0</color>
     <color name="Gainsboro">#DCDCDC</color>
     <color name="OneWord">#0A0A0A</color>
     <color name="TwoWord">#636363</color>
     <color name="ThreeWord">#949494</color>
 
+    <color name="Error">#FF6A6A</color>
 
 </resources>

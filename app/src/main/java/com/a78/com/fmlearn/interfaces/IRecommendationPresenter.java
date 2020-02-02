@@ -8,10 +8,6 @@ public interface IRecommendationPresenter {
 
     void getRecommendationList();
 
-    void pullRefrest();
-
-    void loadMore();
-
     void registerViewCallBack(IRecommendationCallBack callBack);
 
     void unRegisterViewCallBack(IRecommendationCallBack callBack);

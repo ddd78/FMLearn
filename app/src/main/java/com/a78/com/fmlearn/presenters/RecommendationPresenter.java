@@ -38,9 +38,6 @@ public class RecommendationPresenter implements IRecommendationPresenter {
                 }
             }
         }
-        if (recommendationInstance == null){
-
-        }
         return recommendationInstance;
     }
 
@@ -49,17 +46,6 @@ public class RecommendationPresenter implements IRecommendationPresenter {
     public void getRecommendationList() {
         getRecommendationData();
     }
-
-    @Override
-    public void pullRefrest() {
-
-    }
-
-    @Override
-    public void loadMore() {
-
-    }
-
     @Override
     public void registerViewCallBack(IRecommendationCallBack callBack) {
         if (callBack != null && !recommendationCallBackList.contains(callBack)) {
@@ -75,6 +61,7 @@ public class RecommendationPresenter implements IRecommendationPresenter {
     }
 
     public void getRecommendationData() {
+        loadingProcess();
         Map<String, String> map = new HashMap<String, String>();
         map.put(DTransferConstants.LIKE_COUNT, "50");
         CommonRequest.getGuessLikeAlbum(map, new IDataCallBack<GussLikeAlbumList>() {
@@ -87,16 +74,43 @@ public class RecommendationPresenter implements IRecommendationPresenter {
             @Override
             public void onError(int i, String s) {
                 LogUtil.d(TAG,"error");
+                handleError();
             }
         });
     }
 
-    private void handleRecommodationResult(List<Album> albumList) {
+    private void handleError() {
         if (recommendationCallBackList != null){
             for (IRecommendationCallBack callBack : recommendationCallBackList) {
-                callBack.onRecommendationLoad(albumList);
+                callBack.onNetError();
             }
         }
     }
 
+    private void handleRecommodationResult(List<Album> albumList) {
+        if (albumList != null) {
+            if (albumList.size() == 0) {
+                if (recommendationCallBackList != null){
+                    for (IRecommendationCallBack callBack : recommendationCallBackList) {
+                        callBack.onEmpty();
+                    }
+                }
+            }else {
+                if (recommendationCallBackList != null){
+                    for (IRecommendationCallBack callBack : recommendationCallBackList) {
+//                        callBack.onRecommendationLoad(albumList);
+                        callBack.onEmpty();
+                    }
+                }
+            }
+        }
+    }
+
+    private void loadingProcess(){
+        if (recommendationCallBackList != null){
+            for (IRecommendationCallBack callBack : recommendationCallBackList) {
+                callBack.onLoading();
+            }
+        }
+    }
 }

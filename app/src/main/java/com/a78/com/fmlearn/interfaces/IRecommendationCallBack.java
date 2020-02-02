@@ -12,7 +12,9 @@ public interface IRecommendationCallBack {
 
     void onRecommendationLoad(List<Album> result);
 
-    void onLoadMore(List<Album> result);
+    void onNetError();
 
-    void onRefreshMore(List<Album> result);
+    void onEmpty();
+
+    void onLoading();
 }

@@ -1,6 +1,8 @@
 package com.a78.com.fmlearn.base;
 
 import android.app.Application;
+import android.os.Handler;
+import android.util.Log;
 
 import com.a78.com.fmlearn.utils.LogUtil;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
@@ -11,6 +13,8 @@ import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
  */
 
 public class BaseApplication extends Application{
+
+    private static Handler sHandler;
 
     @Override
     public void onCreate() {
@@ -29,5 +33,13 @@ public class BaseApplication extends Application{
         }
 
         LogUtil.init(this.getPackageName(),false);
+
+        Log.d("base", "onCreate: baseApplication");
+
+        sHandler = new Handler();
+    }
+
+    public static Handler getHandler(){
+        return sHandler;
     }
 }
