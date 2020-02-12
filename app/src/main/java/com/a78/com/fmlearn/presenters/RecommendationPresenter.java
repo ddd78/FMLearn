@@ -98,8 +98,7 @@ public class RecommendationPresenter implements IRecommendationPresenter {
             }else {
                 if (recommendationCallBackList != null){
                     for (IRecommendationCallBack callBack : recommendationCallBackList) {
-//                        callBack.onRecommendationLoad(albumList);
-                        callBack.onEmpty();
+                        callBack.onRecommendationLoad(albumList);
                     }
                 }
             }

@@ -4,11 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="maincolor">#FF6A6A</color>
-    <color name="white">#FFFFF0</color>
-    <color name="Gainsboro">#DCDCDC</color>
-    <color name="OneWord">#0A0A0A</color>
-    <color name="TwoWord">#636363</color>
-    <color name="ThreeWord">#949494</color>
+    <color name="white">#FFFFF9</color>
+    <color name="Gainsboro">#F9FFFF</color>
+    <color name="OneWord">#696969</color>
+    <color name="TwoWord">#A9A9A9</color>
+    <color name="ThreeWord">#F8F8FF</color>
 
     <color name="Error">#FF6A6A</color>
 

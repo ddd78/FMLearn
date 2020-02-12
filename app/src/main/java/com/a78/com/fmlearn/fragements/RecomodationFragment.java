@@ -1,7 +1,7 @@
 package com.a78.com.fmlearn.fragements;
 
 
-import android.support.annotation.Nullable;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,24 +10,18 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.a78.com.fmlearn.R;
+import com.a78.com.fmlearn.RecommendationContentActivity;
 import com.a78.com.fmlearn.adapters.RecommendationListAdapter;
 import com.a78.com.fmlearn.base.BaseFragement;
 import com.a78.com.fmlearn.interfaces.IRecommendationCallBack;
+import com.a78.com.fmlearn.presenters.RecommendationContentPresenter;
 import com.a78.com.fmlearn.presenters.RecommendationPresenter;
-import com.a78.com.fmlearn.utils.LogUtil;
 import com.a78.com.fmlearn.views.UiLoad;
-import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
-import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
-import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
-import com.ximalaya.ting.android.opensdk.model.album.GussLikeAlbumList;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class RecomodationFragment extends BaseFragement implements IRecommendationCallBack, UiLoad.OnRetryClickListener {
+public class RecomodationFragment extends BaseFragement implements IRecommendationCallBack, UiLoad.OnRetryClickListener, RecommendationListAdapter.OnRecommendationRecycleClickListener {
 
     private static final String TAG = "RecomodationFragment";
     RecommendationListAdapter recommendationListAdapter;
@@ -47,12 +41,6 @@ public class RecomodationFragment extends BaseFragement implements IRecommendati
         };
 
         uiLoad.setOnRetryClickListenser(this);
-//
-//        uiLoad = new UiLoad(this.getContext()) {
-//        };
-
-//        getRecommendationData();
-
         recommendationPresenter = RecommendationPresenter.getRecommendationInstance();
         recommendationPresenter.registerViewCallBack(this);
         recommendationPresenter.getRecommendationList();
@@ -75,6 +63,7 @@ public class RecomodationFragment extends BaseFragement implements IRecommendati
         recommendRv.setLayoutManager(linearLayoutManager);
         recommendRv.setAdapter(recommendationListAdapter);
 
+        recommendationListAdapter.setonRecommendationRecycleClickListener(this);
 
 
         return rootview;
@@ -116,5 +105,12 @@ public class RecomodationFragment extends BaseFragement implements IRecommendati
         if (recommendationPresenter != null){
             recommendationPresenter.getRecommendationList();
         }
+    }
+
+    @Override
+    public void itemClick(int position,Album date) {
+        RecommendationContentPresenter.getInstance().setTagAlbun(date);
+        Intent intent = new Intent(this.getContext(), RecommendationContentActivity.class);
+        startActivity(intent);
     }
 }

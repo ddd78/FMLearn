@@ -1,6 +1,7 @@
 package com.a78.com.fmlearn.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,10 @@ import java.util.List;
  */
 
 public class RecommendationListAdapter extends RecyclerView.Adapter<RecommendationListAdapter.InnerHolder> {
+
+    private static final String TAG = "RecommendationListAdapt";
+
+    private OnRecommendationRecycleClickListener mOnRecommendationRecycleClickListener = null;
 
     List<Album> albumList = new ArrayList<>();
 
@@ -43,6 +48,16 @@ public class RecommendationListAdapter extends RecyclerView.Adapter<Recommendati
     public void onBindViewHolder(InnerHolder holder, int position) {
         holder.itemView.setTag(position);
         holder.setViewData(albumList.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Log.d(TAG, "onClick: " + view.getTag());
+                if (mOnRecommendationRecycleClickListener != null){
+                    int position = (int) view.getTag();
+                    mOnRecommendationRecycleClickListener.itemClick(position,albumList.get(position));
+                }
+            }
+        });
     }
 
 
@@ -73,5 +88,13 @@ public class RecommendationListAdapter extends RecyclerView.Adapter<Recommendati
             recommodationSoundNumTextView.setText(viewData.getIncludeTrackCount() + "");
             Picasso.with(itemView.getContext()).load(viewData.getCoverUrlLarge()).into(recommodationImageView);
         }
+    }
+
+    public void setonRecommendationRecycleClickListener(OnRecommendationRecycleClickListener clickListener){
+        this.mOnRecommendationRecycleClickListener = clickListener;
+    }
+
+    public interface OnRecommendationRecycleClickListener{
+        void itemClick(int position,Album date);
     }
 }

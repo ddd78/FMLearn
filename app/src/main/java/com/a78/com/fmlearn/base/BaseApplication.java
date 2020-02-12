@@ -1,12 +1,14 @@
 package com.a78.com.fmlearn.base;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
 import com.a78.com.fmlearn.utils.LogUtil;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
+import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 
 /**
  * Created by home on 2020/1/16.
@@ -15,6 +17,9 @@ import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 public class BaseApplication extends Application{
 
     private static Handler sHandler;
+
+    private static Context sContext;
+
 
     @Override
     public void onCreate() {
@@ -34,9 +39,13 @@ public class BaseApplication extends Application{
 
         LogUtil.init(this.getPackageName(),false);
 
-        Log.d("base", "onCreate: baseApplication");
-
+        XmPlayerManager.getInstance(this).init();
         sHandler = new Handler();
+        sContext = getBaseContext();
+    }
+
+    public static Context getsContext(){
+        return sContext;
     }
 
     public static Handler getHandler(){

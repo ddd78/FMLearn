@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shap_play_pop">
+    <RelativeLayout
+        android:id="@+id/pop_play_list_top_linear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/pop_play_list_switch_linear"
+            android:paddingLeft="20dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/pop_play_list_switch_button"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/play_list"
+                android:tint="@color/maincolor"/>
+            <TextView
+                android:id="@+id/pop_play_list_switch_text"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="顺序播放"
+                android:textColor="@color/maincolor"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:id="@+id/pop_play_list_order_linear"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/pop_play_list_order_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/up_order_list"
+                android:tint="@color/maincolor"/>
+            <TextView
+                android:id="@+id/pop_play_list_order_text"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="正序"
+                android:textColor="@color/maincolor"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pop_play_list_recycler"
+        android:layout_below="@+id/pop_play_list_top_linear"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        />
+
+    <TextView
+        android:id="@+id/pop_play_list_close_text"
+        android:layout_below="@id/pop_play_list_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="关闭"
+        android:textColor="@color/OneWord"
+        android:textSize="18sp"/>
+</RelativeLayout>

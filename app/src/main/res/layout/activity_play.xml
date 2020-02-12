@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.a78.com.fmlearn.PlayActivity">
+
+    <TextView
+        android:id="@+id/play_title_text"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:text="标题"
+        android:maxLines="2"
+        android:ellipsize="middle"
+        android:gravity="center"/>
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/play_content_viewpager"
+        android:layout_below="@id/play_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="100dp"/>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/play_current_time_postion_text"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="00.00"
+                android:textSize="14sp"
+                android:textColor="@color/OneWord"/>
+            <SeekBar
+                android:id="@+id/paly_seekbar"
+                android:layout_centerHorizontal="true"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"/>
+            <TextView
+                android:id="@+id/play_total_time_position"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="00.00"
+                android:textSize="14sp"
+                android:textColor="@color/OneWord"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/player_mode_switch_btn"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:src="@mipmap/play_list"
+                android:tint="@color/maincolor"/>
+
+            <ImageView
+                android:id="@+id/play_pre"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:tint="@color/maincolor"
+                android:src="@mipmap/selector_palyer_pre" />
+
+            <ImageView
+                android:id="@+id/play_or_pause_btn"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:tint="@color/maincolor"
+                android:src="@mipmap/video_play" />
+
+            <ImageView
+                android:id="@+id/play_next"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:tint="@color/maincolor"
+                android:src="@mipmap/selector_palyer_next" />
+            <ImageView
+                android:id="@+id/player_list"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:tint="@color/maincolor"
+                android:src="@mipmap/selector_palyer_list" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
