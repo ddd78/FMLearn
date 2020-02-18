@@ -1,6 +1,7 @@
 package com.a78.com.fmlearn.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class RecommendationListAdapter extends RecyclerView.Adapter<Recommendati
     private OnRecommendationRecycleClickListener mOnRecommendationRecycleClickListener = null;
 
     List<Album> albumList = new ArrayList<>();
+    private OnRecommendationLongClickListener onRecommendationLongClickListener = null;
 
     public RecommendationListAdapter() {
     }
@@ -58,6 +60,17 @@ public class RecommendationListAdapter extends RecyclerView.Adapter<Recommendati
                 }
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (onRecommendationLongClickListener != null) {
+                    int position = (int) view.getTag();
+                    onRecommendationLongClickListener.itemLongClick(albumList.get(position));
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -86,7 +99,9 @@ public class RecommendationListAdapter extends RecyclerView.Adapter<Recommendati
             recommodationContextTextView.setText(viewData.getAlbumIntro());
             recommodationPlayNumTextView.setText(viewData.getPlayCount() + "");
             recommodationSoundNumTextView.setText(viewData.getIncludeTrackCount() + "");
-            Picasso.with(itemView.getContext()).load(viewData.getCoverUrlLarge()).into(recommodationImageView);
+            if (!TextUtils.isEmpty(viewData.getCoverUrlLarge())){
+                Picasso.with(itemView.getContext()).load(viewData.getCoverUrlLarge()).into(recommodationImageView);
+            }
         }
     }
 
@@ -96,5 +111,14 @@ public class RecommendationListAdapter extends RecyclerView.Adapter<Recommendati
 
     public interface OnRecommendationRecycleClickListener{
         void itemClick(int position,Album date);
+    }
+
+
+    public void setonRecommendationLongClickListener(OnRecommendationLongClickListener listener){
+        this.onRecommendationLongClickListener = listener;
+    }
+
+    public interface OnRecommendationLongClickListener{
+        void itemLongClick(Album album);
     }
 }

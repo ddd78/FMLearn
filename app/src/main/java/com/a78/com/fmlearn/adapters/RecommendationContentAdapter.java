@@ -23,6 +23,7 @@ public class RecommendationContentAdapter extends RecyclerView.Adapter<Recommend
 
     private List<Track> trackList = new ArrayList<>();
     private ContentItemClick itemClick = null;
+    private ContentItemLongClickListener contentItemLongClickListener = null;
 
     @Override
     public InnerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -55,6 +56,14 @@ public class RecommendationContentAdapter extends RecyclerView.Adapter<Recommend
                 itemClick.onContentItemClick(trackList,position);
             }
         });
+
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                contentItemLongClickListener.onContentItemLongClick(trackList.get(position));
+                return false;
+            }
+        });
     }
 
     @Override
@@ -80,5 +89,13 @@ public class RecommendationContentAdapter extends RecyclerView.Adapter<Recommend
 
     public interface ContentItemClick{
         void onContentItemClick(List<Track> trackList, int position);
+    }
+
+    public void setContentItemLongClickListener(ContentItemLongClickListener longClickListener){
+        this.contentItemLongClickListener = longClickListener;
+    }
+
+    public interface ContentItemLongClickListener{
+        void onContentItemLongClick(Track  track);
     }
 }

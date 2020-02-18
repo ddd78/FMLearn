@@ -91,11 +91,11 @@ public abstract class UiLoad extends FrameLayout {
 
     }
 
-    private View getEmptyView() {
+    protected View getEmptyView() {
         return LayoutInflater.from(getContext()).inflate(R.layout.fragment_empty_view,this,false);
     }
 
-    private View getErrorView() {
+    protected View getErrorView() {
         View errorView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_error_view,this,false);
 
         errorView.findViewById(R.id.net_error_linear).setOnClickListener(new OnClickListener() {
@@ -117,7 +117,7 @@ public abstract class UiLoad extends FrameLayout {
 //    }
 
 
-    private View getLoadingView() {
+    protected View getLoadingView() {
         return LayoutInflater.from(getContext()).inflate(R.layout.fragment_loading_view,this,false);
     }
 

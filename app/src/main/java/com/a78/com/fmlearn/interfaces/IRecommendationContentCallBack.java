@@ -16,4 +16,8 @@ public interface IRecommendationContentCallBack {
     void onContentLoad(Album album);
 
     void onContentLoadError();
+
+    void loadMoreFinish(int size);
+
+    void reFreshFinsh(int size);
 }

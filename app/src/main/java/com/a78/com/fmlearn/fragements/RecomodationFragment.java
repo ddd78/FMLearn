@@ -17,6 +17,7 @@ import com.a78.com.fmlearn.interfaces.IRecommendationCallBack;
 import com.a78.com.fmlearn.presenters.RecommendationContentPresenter;
 import com.a78.com.fmlearn.presenters.RecommendationPresenter;
 import com.a78.com.fmlearn.views.UiLoad;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
 import java.util.List;
@@ -33,12 +34,15 @@ public class RecomodationFragment extends BaseFragement implements IRecommendati
     @Override
     protected View onSubViewLoad(final LayoutInflater layoutInflater, ViewGroup container) {
 
-        uiLoad = new UiLoad(getContext()) {
-            @Override
-            protected View getSuccessView(ViewGroup container) {
-                return creteSuccessView(layoutInflater,container);
-            }
-        };
+
+        if (uiLoad == null) {
+            uiLoad = new UiLoad(getContext()) {
+                @Override
+                protected View getSuccessView(ViewGroup container) {
+                    return creteSuccessView(layoutInflater,container);
+                }
+            };
+        }
 
         uiLoad.setOnRetryClickListenser(this);
         recommendationPresenter = RecommendationPresenter.getRecommendationInstance();
@@ -64,6 +68,11 @@ public class RecomodationFragment extends BaseFragement implements IRecommendati
         recommendRv.setAdapter(recommendationListAdapter);
 
         recommendationListAdapter.setonRecommendationRecycleClickListener(this);
+
+        TwinklingRefreshLayout refreshLayout = rootview.findViewById(R.id.recommendation_list_refresh);
+//        refreshLayout.setPureScrollModeOn();
+        refreshLayout.setEnableRefresh(false);
+        refreshLayout.setEnableLoadmore(false);
 
 
         return rootview;

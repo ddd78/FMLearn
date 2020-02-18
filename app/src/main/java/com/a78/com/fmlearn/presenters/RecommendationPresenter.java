@@ -2,19 +2,16 @@ package com.a78.com.fmlearn.presenters;
 
 import android.support.annotation.Nullable;
 
+import com.a78.com.fmlearn.data.XmApi;
 import com.a78.com.fmlearn.interfaces.IRecommendationCallBack;
 import com.a78.com.fmlearn.interfaces.IRecommendationPresenter;
 import com.a78.com.fmlearn.utils.LogUtil;
-import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
-import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.album.GussLikeAlbumList;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by home on 2020/1/31.
@@ -25,6 +22,7 @@ public class RecommendationPresenter implements IRecommendationPresenter {
     private static final String TAG = "RecommendationPresenter";
 
     private List<IRecommendationCallBack> recommendationCallBackList = new ArrayList<>();
+    private List<Album> albumList;
 
     private RecommendationPresenter() {}
 
@@ -62,12 +60,11 @@ public class RecommendationPresenter implements IRecommendationPresenter {
 
     public void getRecommendationData() {
         loadingProcess();
-        Map<String, String> map = new HashMap<String, String>();
-        map.put(DTransferConstants.LIKE_COUNT, "50");
-        CommonRequest.getGuessLikeAlbum(map, new IDataCallBack<GussLikeAlbumList>() {
+
+        XmApi.getInstance().getRecommoadtionList(new IDataCallBack<GussLikeAlbumList>() {
             @Override
             public void onSuccess(@Nullable GussLikeAlbumList gussLikeAlbumList) {
-                List<Album> albumList = gussLikeAlbumList.getAlbumList();
+                albumList = gussLikeAlbumList.getAlbumList();
                 handleRecommodationResult(albumList);
             }
 
@@ -77,6 +74,23 @@ public class RecommendationPresenter implements IRecommendationPresenter {
                 handleError();
             }
         });
+//        CommonRequest.getGuessLikeAlbum(map, new IDataCallBack<GussLikeAlbumList>() {
+//            @Override
+//            public void onSuccess(@Nullable GussLikeAlbumList gussLikeAlbumList) {
+//                List<Album> albumList = gussLikeAlbumList.getAlbumList();
+//                handleRecommodationResult(albumList);
+//            }
+//
+//            @Override
+//            public void onError(int i, String s) {
+//                LogUtil.d(TAG,"error");
+//                handleError();
+//            }
+//        });
+    }
+
+    public List<Album> getAlbumList(){
+        return albumList;
     }
 
     private void handleError() {

@@ -3,6 +3,7 @@ package com.a78.com.fmlearn;
 import android.animation.ValueAnimator;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -63,11 +64,17 @@ public class PlayActivity extends BaseActivity implements IPlayCallBack, PlayPop
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        playPresenter = PlayPresenter.getPlayPresenter();
-        playPresenter.registerViewCallBack(this);
         initView();
         initEvent();
         initBgAnimation();
+        playPresenter = PlayPresenter.getPlayPresenter();
+        playPresenter.registerViewCallBack(this);
+
+        playPresenter.getPlayList();
+
+//        playPresenter.play();
+//        onPlayStart();
+
 
     }
 
@@ -216,24 +223,21 @@ public class PlayActivity extends BaseActivity implements IPlayCallBack, PlayPop
         playPopView = new PlayPopView();
 
 
-
-        playPresenter.getPlayList();
-
-        playPresenter.play();
-        onPlayStart();
     }
 
     @Override
     public void onPlayStart() {
         if (startOrStopButton != null) {
             startOrStopButton.setImageResource(R.mipmap.pause);
+            Log.d(TAG, "onPlayStart: +++++");
         }
     }
 
     @Override
     public void onPlayPause() {
         if (startOrStopButton != null) {
-            startOrStopButton.setImageResource(R.mipmap.video_play);
+            startOrStopButton.setImageResource(R.mipmap.play);
+            Log.d(TAG, "onPlayPause: +++++++");
         }
     }
 

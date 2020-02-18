@@ -33,9 +33,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".RecommendationContentActivity" />
-        <activity android:name=".PlayActivity"></activity>
-        <service android:name="com.ximalaya.ting.android.opensdk.player.service.XmPlayerService"
-        android:process=":player"/>
+        <activity android:name=".PlayActivity" />
+
+        <service
+            android:name="com.ximalaya.ting.android.opensdk.player.service.XmPlayerService"
+            android:process=":player" />
+
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@
             android:src="@mipmap/empty"
             android:tint="@color/Error"/>
         <TextView
+            android:id="@+id/empty_view_text"
             android:layout_marginTop="10dp"
             android:textSize="15sp"
             android:text="没有相关内容......"
